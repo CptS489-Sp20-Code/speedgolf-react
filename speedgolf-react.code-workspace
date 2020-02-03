@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": " constructor(props) {\r\n        super(props);\r\n        //Create a ref for the email input DOM element\r\n        this.emailInputRef = React.createRef();\r\n    }",
+					"expression": "/* AppMode: An enumerated type to represent the mode the app is in. \r\n*/\r\n\r\nconst AppMode = {\r\n    LOGIN: \"LoginMode\",\r\n    FEED: \"FeedMode\",\r\n    ROUNDS: \"RoundsMode\",\r\n    COURSES: \"CoursesMode\"\r\n};\r\n\r\nObject.freeze(AppMode); //This ensures that the object is immutable.\r\n\r\nexport default AppMode;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,16 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//Focus cursor in email input field when mounted\r\n    componentDidMount() {\r\n        this.emailInputRef.current.focus();\r\n    }",
+					"expression": "import AppMode from \"./../AppMode.js\";",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "render() {\r\n    return (\r\n      <div>\r\n        <NavBar title=\"Welcome to SpeedScore\" mode={this.state.mode}/>\r\n        <SideMenu mode={this.state.mode}/>\r\n        <ModeBar mode={this.state.mode} \r\n                 changeMode={this.handleChangeMode}/>\r\n        <FloatingButton mode={this.state.mode}/>\r\n        <LoginPage changeMode={this.handleChangeMode}/>\r\n      </div>\r\n      );  \r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
