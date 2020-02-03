@@ -194,6 +194,15 @@ background-color: #F0F0F0;
 color: #13294E;
 }
 
+/* mode bar button styling when item is selected */
+.modebar-item-selected {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: #13294E !important;
+  background-color: #F0F0F0;
+}
+
 /* Add a gray background color to button when it is hovered */
 .modebar a:hover {
   color: #F0F0F0;

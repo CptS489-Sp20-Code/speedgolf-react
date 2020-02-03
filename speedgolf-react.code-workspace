@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "/* Make an item visible */\r\n.visible {\r\n  display: block;\r\n}\r\n\r\n/* Make an item invisible */\r\n.invisible {\r\n  display: none;\r\n}",
+					"expression": "handleModeBtnClick = (newMode) => {\r\n      if (this.props.mode != newMode) {\r\n          this.props.changeMode(newMode);\r\n      }\r\n    }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "import AppMode from '../AppMode.js';",
+					"expression": "/* mode bar button styling when item is selected */\r\n.modebar-item-selected {\r\n  pointer-events: none;\r\n  cursor: default;\r\n  text-decoration: none;\r\n  color: #13294E !important;\r\n  background-color: #F0F0F0;\r\n}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,52 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "{\"modebar\" + (this.props.mode === AppMode.LOGIN ? \" invisible\" : \" visible\")}",
+					"expression": "onClick={() => this.handleModeBtnClick(AppMode.FEED)}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onClick={() => this.handleModeBtnClick(AppMode.ROUNDS)}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onClick={() => this.handleModeBtnClick(AppMode.COURSES)}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.FEED)}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.ROUNDS)}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.COURSES)}>",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
