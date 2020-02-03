@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "const modeTitle = {};\r\nmodeTitle[AppMode.LOGIN] = \"Welcome to SpeedScore\";\r\nmodeTitle[AppMode.FEED] = \"Activity Feed\";\r\nmodeTitle[AppMode.ROUNDS] = \"My Rounds\";\r\nmodeTitle[AppMode.COURSES] = \"Courses\";",
+					"expression": "/* Make an item visible */\r\n.visible {\r\n  display: block;\r\n}\r\n\r\n/* Make an item invisible */\r\n.invisible {\r\n  display: none;\r\n}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,16 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": " title={modeTitle[this.state.mode]}",
+					"expression": "import AppMode from '../AppMode.js';",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "{\"modebar\" + (this.props.mode === AppMode.LOGIN ? \" invisible\" : \" visible\")}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
