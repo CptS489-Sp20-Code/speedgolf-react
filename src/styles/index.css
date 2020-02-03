@@ -153,7 +153,7 @@ color: gray;
 /* Styling for the divs in the app. Ensures that the content at top isn't obscured by top bar */
 .padded-page {
 padding: 56px 8px 0px 8px;
-
+text-align: center;
 }
 
 .hide {

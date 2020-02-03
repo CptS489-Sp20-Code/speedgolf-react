@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "const modeToPage = {};\r\nmodeToPage[AppMode.LOGIN] = LoginPage;\r\nmodeToPage[AppMode.FEED] = FeedPage;\r\nmodeToPage[AppMode.ROUNDS] = RoundsPage;\r\nmodeToPage[AppMode.COURSES] = CoursesPage;",
+					"expression": "import React from 'react';\r\n\r\nclass CoursesPage extends React.Component {\r\n\r\n       render() {\r\n        return (\r\n        <div className=\"padded-page\">\r\n            <h1>Courses</h1>\r\n            <h2>This page is under construction.</h2>\r\n            <img src=\"https://dl.dropboxusercontent.com/s/qpjhy9x9gwdxpob/SpeedScoreLogo64Trans.png\" \r\n             height=\"200\" width=\"200\"/>\r\n            <p style={{fontStyle: \"italic\"}}>\r\n            Version CptS 489 React Demo<br/>\r\n            &copy; 2017-20 The Professor of Speedgolf. All rights reserved.</p>\r\n        </div>\r\n        );\r\n    }   \r\n}\r\n\r\nexport default CoursesPage;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "const ModePage = modeToPage[this.state.mode];",
+					"expression": "import React from 'react';\r\n\r\nclass FeedPage extends React.Component {\r\n\r\n    render() {\r\n        return (\r\n        <div className=\"padded-page\">\r\n            <h1 >Activity Feed</h1>\r\n            <h2>This page is under construction.</h2>\r\n            <img src=\"https://dl.dropboxusercontent.com/s/qpjhy9x9gwdxpob/SpeedScoreLogo64Trans.png\" \r\n             height=\"200\" width=\"200\"/>\r\n            <p style={{fontStyle: \"italic\"}}>Version CptS 489 React Demo<br/>\r\n            &copy; 2017-20 The Professor of Speedgolf. All rights reserved.</p>\r\n        </div>\r\n        );\r\n    }   \r\n}\r\n\r\nexport default FeedPage;\r\n",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "<ModePage menuOpen={this.state.menuOpen}\r\n          changeMode={this.handleChangeMode}\r\n          setUserId={this.setUserId}/>",
+					"expression": "import React from 'react';\r\n\r\nclass RoundsPage extends React.Component {\r\n\r\n    render() {\r\n      return(\r\n      <div className=\"padded-page\">\r\n        <h1></h1>\r\n        <table className=\"table table-hover\">\r\n          <thead className=\"thead-light\">\r\n          <tr>\r\n            <th>Date</th>\r\n            <th>Course</th>\r\n            <th>Score</th>\r\n            <th>View/Edit...</th>\r\n            <th>Delete</th>\r\n          </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n            <td colSpan=\"5\" style={{fontStyle: \"italic\"}}>No rounds logged</td>\r\n            </tr> \r\n          </tbody>\r\n        </table>\r\n      </div>\r\n      );\r\n    }\r\n}\r\n\r\nexport default RoundsPage;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -36,7 +36,16 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "// modeToPage[AppMode.FEED] = FeedPage;\r\n// modeToPage[AppMode.ROUNDS] = RoundsPage;\r\n// modeToPage[AppMode.COURSES] = CoursesPage;",
+					"expression": "import FeedPage from './FeedPage.js';\r\nimport RoundsPage from './RoundsPage.js';\r\nimport CoursesPage from './CoursesPage.js';",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "modeToPage[AppMode.FEED] = FeedPage;\r\nmodeToPage[AppMode.ROUNDS] = RoundsPage;\r\nmodeToPage[AppMode.COURSES] = CoursesPage;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},

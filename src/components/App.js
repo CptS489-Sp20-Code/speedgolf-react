@@ -4,6 +4,9 @@ import SideMenu from './SideMenu.js';
 import ModeBar from './ModeBar.js';
 import FloatingButton from './FloatingButton.js';
 import LoginPage from './LoginPage.js';
+import FeedPage from './FeedPage.js';
+import RoundsPage from './RoundsPage.js';
+import CoursesPage from './CoursesPage.js';
 import AppMode from "./../AppMode.js";
 
 const modeTitle = {};
@@ -14,9 +17,9 @@ modeTitle[AppMode.COURSES] = "Courses";
 
 const modeToPage = {};
 modeToPage[AppMode.LOGIN] = LoginPage;
-// modeToPage[AppMode.FEED] = FeedPage;
-// modeToPage[AppMode.ROUNDS] = RoundsPage;
-// modeToPage[AppMode.COURSES] = CoursesPage;
+modeToPage[AppMode.FEED] = FeedPage;
+modeToPage[AppMode.ROUNDS] = RoundsPage;
+modeToPage[AppMode.COURSES] = CoursesPage;
 
 class App extends React.Component {
 
