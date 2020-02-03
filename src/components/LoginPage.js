@@ -1,4 +1,5 @@
 import React from 'react';
+import AppMode from "./../AppMode.js";
 
 class LoginPage extends React.Component {
 
@@ -13,12 +14,18 @@ class LoginPage extends React.Component {
         this.emailInputRef.current.focus();
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.changeMode(AppMode.FEED);
+        this.props.setUserId(this.emailInputRef.current.value);
+    }
+
     render() {
         return(
         <div id="login-mode-div" className="padded-page">
         <center>
             <h1 />
-            <form id="loginInterface">
+            <form onSubmit={this.handleSubmit}>
             <label htmlFor="emailInput" style={{ padding: 0, fontSize: 24 }}>
                 Email:
                 <input
