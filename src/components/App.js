@@ -11,20 +11,43 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {mode: AppMode.LOGIN};
+    this.state = {mode: AppMode.LOGIN,
+                  menuOpen: false};
   }
 
   handleChangeMode = (newMode) => {
     this.setState({mode: newMode});
   }
 
+  openMenu = () => {
+    this.setState({menuOpen : true});
+  }
+  
+  closeMenu = () => {
+    this.setState({menuOpen : false});
+  }
+
+  toggleMenuOpen = () => {
+    this.setState(prevState => ({menuOpen: !prevState.menuOpen}));
+  }
+
+
   render() {
     return (
       <div>
-        <NavBar title="Welcome to SpeedScore" mode={this.state.mode}/>
-        <SideMenu mode={this.state.mode}/>
-        <ModeBar mode={this.state.mode} 
-                 changeMode={this.handleChangeMode}/>
+        <NavBar title="Welcome to SpeedScore" 
+          mode={this.state.mode}
+          changeMode={this.handleChangeMode}
+          menuOpen={this.state.menuOpen}
+          toggleMenuOpen={this.toggleMenuOpen}/>
+        <SideMenu 
+          mode={this.state.mode}
+          menuOpen={this.state.menuOpen}
+          changeMode={this.handleChangeMode}/>
+        <ModeBar 
+          mode={this.state.mode} 
+          changeMode={this.handleChangeMode}
+          menuOpen={this.state.menuOpen}/>
         <FloatingButton mode={this.state.mode}/>
         <LoginPage changeMode={this.handleChangeMode}/>
       </div>

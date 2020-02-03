@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "/* AppMode: An enumerated type to represent the mode the app is in. \r\n*/\r\n\r\nconst AppMode = {\r\n    LOGIN: \"LoginMode\",\r\n    FEED: \"FeedMode\",\r\n    ROUNDS: \"RoundsMode\",\r\n    COURSES: \"CoursesMode\"\r\n};\r\n\r\nObject.freeze(AppMode); //This ensures that the object is immutable.\r\n\r\nexport default AppMode;",
+					"expression": "menuOpen = false",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "import AppMode from \"./../AppMode.js\";",
+					"expression": "openMenu = () => {\r\n    this.setState({menuOpen : true});\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,16 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "render() {\r\n    return (\r\n      <div>\r\n        <NavBar title=\"Welcome to SpeedScore\" mode={this.state.mode}/>\r\n        <SideMenu mode={this.state.mode}/>\r\n        <ModeBar mode={this.state.mode} \r\n                 changeMode={this.handleChangeMode}/>\r\n        <FloatingButton mode={this.state.mode}/>\r\n        <LoginPage changeMode={this.handleChangeMode}/>\r\n      </div>\r\n      );  \r\n  }",
+					"expression": "closeMenu = () => {\r\n    this.setState({menuOpen : false});\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "toggleMenuOpen = () => {\r\n    this.setState(prevState => ({menuOpen: !prevState.menuOpen}));\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
