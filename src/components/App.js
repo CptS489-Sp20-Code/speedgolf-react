@@ -12,6 +12,12 @@ modeTitle[AppMode.FEED] = "Activity Feed";
 modeTitle[AppMode.ROUNDS] = "My Rounds";
 modeTitle[AppMode.COURSES] = "Courses";
 
+const modeToPage = {};
+modeToPage[AppMode.LOGIN] = LoginPage;
+// modeToPage[AppMode.FEED] = FeedPage;
+// modeToPage[AppMode.ROUNDS] = RoundsPage;
+// modeToPage[AppMode.COURSES] = CoursesPage;
+
 class App extends React.Component {
 
   constructor(props) {
@@ -43,6 +49,7 @@ class App extends React.Component {
 
 
   render() {
+    const ModePage = modeToPage[this.state.mode];
     return (
       <div>
         <NavBar 
@@ -60,7 +67,7 @@ class App extends React.Component {
           changeMode={this.handleChangeMode}
           menuOpen={this.state.menuOpen}/>
         <FloatingButton mode={this.state.mode}/>
-        <LoginPage 
+        <ModePage menuOpen={this.state.menuOpen}
           changeMode={this.handleChangeMode}
           setUserId={this.setUserId}/>
       </div>

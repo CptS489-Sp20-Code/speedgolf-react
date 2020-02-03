@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "handleModeBtnClick = (newMode) => {\r\n      if (this.props.mode != newMode) {\r\n          this.props.changeMode(newMode);\r\n      }\r\n    }",
+					"expression": "const modeToPage = {};\r\nmodeToPage[AppMode.LOGIN] = LoginPage;\r\nmodeToPage[AppMode.FEED] = FeedPage;\r\nmodeToPage[AppMode.ROUNDS] = RoundsPage;\r\nmodeToPage[AppMode.COURSES] = CoursesPage;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "/* mode bar button styling when item is selected */\r\n.modebar-item-selected {\r\n  pointer-events: none;\r\n  cursor: default;\r\n  text-decoration: none;\r\n  color: #13294E !important;\r\n  background-color: #F0F0F0;\r\n}",
+					"expression": "const ModePage = modeToPage[this.state.mode];",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "onClick={() => this.handleModeBtnClick(AppMode.FEED)}>",
+					"expression": "<ModePage menuOpen={this.state.menuOpen}\r\n          changeMode={this.handleChangeMode}\r\n          setUserId={this.setUserId}/>",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -36,43 +36,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "onClick={() => this.handleModeBtnClick(AppMode.ROUNDS)}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "onClick={() => this.handleModeBtnClick(AppMode.COURSES)}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.FEED)}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.ROUNDS)}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "onClick={this.props.menuOpen ? null : \r\n              () => this.handleModeBtnClick(AppMode.COURSES)}>",
+					"expression": "// modeToPage[AppMode.FEED] = FeedPage;\r\n// modeToPage[AppMode.ROUNDS] = RoundsPage;\r\n// modeToPage[AppMode.COURSES] = CoursesPage;",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
