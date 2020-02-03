@@ -1,6 +1,18 @@
 import React from 'react';
 
 class LoginPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        //Create a ref for the email input DOM element
+        this.emailInputRef = React.createRef();
+    }
+
+    //Focus cursor in email input field when mounted
+    componentDidMount() {
+        this.emailInputRef.current.focus();
+    }
+
     render() {
         return(
         <div id="login-mode-div" className="padded-page">
@@ -10,6 +22,7 @@ class LoginPage extends React.Component {
             <label htmlFor="emailInput" style={{ padding: 0, fontSize: 24 }}>
                 Email:
                 <input
+                ref={this.emailInputRef}
                 className="form-control login-text"
                 type="email"
                 placeholder="Enter Email Address"
