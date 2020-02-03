@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "menuOpen = false",
+					"expression": "setUserId={this.setUserId}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "openMenu = () => {\r\n    this.setState({menuOpen : true});\r\n  }",
+					"expression": "setUserId = (Id) => {\r\n    this.setState({userId: Id});\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,16 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "closeMenu = () => {\r\n    this.setState({menuOpen : false});\r\n  }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "toggleMenuOpen = () => {\r\n    this.setState(prevState => ({menuOpen: !prevState.menuOpen}));\r\n  }",
+					"expression": "userId: \"\"",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
