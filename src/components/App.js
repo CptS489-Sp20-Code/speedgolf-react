@@ -5,7 +5,12 @@ import ModeBar from './ModeBar.js';
 import FloatingButton from './FloatingButton.js';
 import LoginPage from './LoginPage.js';
 import AppMode from "./../AppMode.js";
-import { render } from '@testing-library/react';
+
+const modeTitle = {};
+modeTitle[AppMode.LOGIN] = "Welcome to SpeedScore";
+modeTitle[AppMode.FEED] = "Activity Feed";
+modeTitle[AppMode.ROUNDS] = "My Rounds";
+modeTitle[AppMode.COURSES] = "Courses";
 
 class App extends React.Component {
 
@@ -40,7 +45,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar title="Welcome to SpeedScore" 
+        <NavBar 
+          title={modeTitle[this.state.mode]}
           mode={this.state.mode}
           changeMode={this.handleChangeMode}
           menuOpen={this.state.menuOpen}

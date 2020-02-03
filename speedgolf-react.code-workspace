@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "setUserId={this.setUserId}",
+					"expression": "const modeTitle = {};\r\nmodeTitle[AppMode.LOGIN] = \"Welcome to SpeedScore\";\r\nmodeTitle[AppMode.FEED] = \"Activity Feed\";\r\nmodeTitle[AppMode.ROUNDS] = \"My Rounds\";\r\nmodeTitle[AppMode.COURSES] = \"Courses\";",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,16 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "setUserId = (Id) => {\r\n    this.setState({userId: Id});\r\n  }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "userId: \"\"",
+					"expression": " title={modeTitle[this.state.mode]}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
