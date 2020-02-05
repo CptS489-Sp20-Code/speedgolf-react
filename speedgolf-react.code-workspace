@@ -32,6 +32,42 @@
 					"wholeMatch": false
 				},
 				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "handleMenuBtnClick = () => {\r\n      if (this.props.mode != AppMode.LOGIN) {\r\n        this.props.toggleMenuOpen();\r\n      }\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "className={\"menubtnicon \" + \r\n                (this.props.menuOpen ? \"fa fa-times\":\"fa fa-bars\")}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "className={\"sidemenu-btn-icon \" + \r\n                (this.props.menuOpen ? \"fa fa-times\":\"fa fa-bars\")}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "import AppMode from '../AppMode.js';",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
 			}
 		]
 	}
