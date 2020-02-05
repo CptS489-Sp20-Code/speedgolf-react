@@ -23,6 +23,33 @@
 					"wholeMatch": false
 				},
 				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " height: 100%; /* 100% of app */",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//When App component mounts, add a window-level click handler to close the\r\n  //side menu if it is open. This event should fire only if no other lower-level\r\n  //events intercept the click.\r\n  componentDidMount() {\r\n    window.addEventListener(\"click\",this.handleClick);\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//We remove the event listener when the component\r\n//unmounts. This is a best practice. \r\ncomponentWillUnmount() {\r\n  window.removeEventListener(\"click\",this.handleClick);\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
 			}
 		]
 	}

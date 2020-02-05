@@ -50,6 +50,19 @@ class App extends React.Component {
     this.setState({userId: Id});
   }
 
+  //When App component mounts, add a window-level click handler to close the
+  //side menu if it is open. This event should fire only if no other lower-level
+  //events intercept the click.
+  componentDidMount() {
+    window.addEventListener("click",this.handleClick);
+  }
+
+//We remove the event listener when the component
+//unmounts. This is a best practice. 
+componentWillUnmount() {
+  window.removeEventListener("click",this.handleClick);
+}
+
   //When the user clicks anywhere on the app and the menu is open, close it.
   //This function takes advantage of event bubbling.
   handleClick = (event) => {
