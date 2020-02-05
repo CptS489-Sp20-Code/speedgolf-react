@@ -27,7 +27,8 @@ class App extends React.Component {
     super(props);
     this.state = {mode: AppMode.LOGIN,
                   menuOpen: false,
-                  userId: ""};
+                  userId: "",
+                  showAbout: false};
   }
 
   handleChangeMode = (newMode) => {
@@ -72,6 +73,65 @@ componentWillUnmount() {
     event.stopPropagation();
   }
 
+  toggleAbout = () => {
+    this.setState(prevState => ({showAbout: !prevState.showAbout}));
+  }
+
+  renderAbout = () => {
+    return (
+      <div className="modal" role="dialog">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title"><b>About SpeedScore</b>
+                <button className="close-modal-button" onClick={this.toggleAbout}>
+                  &times;</button>
+              </h3>
+            </div>
+            <div className="modal-body">
+              <img
+              src="https://dl.dropboxusercontent.com/s/awuwr1vpuw1lkyl/SpeedScore4SplashLogo.png"
+              height="200" width="200"/>
+              <h3>The World's First and Only Suite of Apps for
+              Speedgolf</h3>
+              <p>Version CptS 489 Sp20, Build W06C2 (React)<br/>
+              &copy; 2017-20 The Professor of Speedgolf. All rights
+              reserved.
+              </p>
+              <div style={{textAlign: "left"}}>
+                <p>SpeedScore apps support</p>
+                <ul>
+                <li>live touranment scoring (<i>SpeedScore Live&reg;</i>)</li>
+                <li>tracking personal speedgolf rounds and sharing results
+                (<i>SpeedScore Track&reg;</i>)</li>
+                <li>finding speedgolf-friendly courses, booking tee times, and
+                paying to play speedgolf by the minute (<i>SpeedScore
+                Play&reg;</i>)</li>
+                </ul>
+                <p>SpeedScore was first developed by Dr. Chris Hundhausen,
+                associate professor of computer science at Washington State
+                University and the <i>Professor of Speedgolf</i>, with support
+                from Scott Dawley, CEO of Speedgolf USA, LLC. It leverages
+                Google server-side technologies.</p>
+                <p>For more information on SpeedScore, visit <a
+                href="http://speedscore.live" target="_blank">SpeedScore's web
+                site</a>. For more information on speedgolf, visit <a
+                href="http://playspeedgolf.com"
+                target="_blank">playspeedgolf.com</a> and <a
+                href="http://usaspeedgolf.com" target="_blank">Speedgolf
+                USA</a>.</p>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-primary btncolortheme"
+                onClick={this.toggleAbout}>OK</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const ModePage = modeToPage[this.state.mode];
     return (
@@ -86,7 +146,8 @@ componentWillUnmount() {
           mode={this.state.mode}
           menuOpen={this.state.menuOpen}
           changeMode={this.handleChangeMode}
-          userId={this.state.userId}/>
+          userId={this.state.userId}
+          showAbout={this.toggleAbout}/>
         <ModeBar 
           mode={this.state.mode} 
           changeMode={this.handleChangeMode}
@@ -95,6 +156,7 @@ componentWillUnmount() {
         <ModePage menuOpen={this.state.menuOpen}
           changeMode={this.handleChangeMode}
           setUserId={this.setUserId}/>
+        {this.state.showAbout ? this.renderAbout() : null}
       </div>
       );  
   }

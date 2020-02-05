@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "  //When the user clicks anywhere on the app and the menu is open, close it.\r\n  //This function takes advantage of event bubbling.\r\n  handleClick = (event) => {\r\n    if (this.state.menuOpen) {\r\n      this.closeMenu();\r\n    }\r\n    event.stopPropagation();\r\n  }",
+					"expression": "/* modal.css\r\n   This file contains css definitions necessary to support modal dialog boxes using a pure HTML/JavaScript/CSS \r\n   approach. The definitions are taken directly from https://www.w3schools.com/howto/howto_css_modals.asp */\r\n\r\n\r\n/* The Modal (background) */\r\n.modal {\r\n    display: block; \r\n    position: fixed; /* Stay in place */\r\n    z-index: 101; /* Sit on top */\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%; /* Full width */\r\n    height: 100%; /* Full height */\r\n    overflow: auto; /* Enable scroll if needed */\r\n    background-color: rgb(0,0,0); /* Fallback color */\r\n    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\r\n  }\r\n  \r\n  /* Modal Content/Box */\r\n  .modal-content {\r\n    background-color: #fefefe;\r\n    background: #fff;\r\n    margin: 15% auto; /* 15% from the top and centered */\r\n    padding: 20px;\r\n    border: 1px solid #888;\r\n    width: 80%; /* Could be more or less, depending on screen size */\r\n  }\r\n  \r\n  .modal-title {\r\n    text-align: center;\r\n    width: 100%;\r\n    font-weight: bold;\r\n  }\r\n\r\n  .modal-header {\r\n      padding: 2px 16px;\r\n      background-color:#13294E;\r\n      color: white;\r\n    }\r\n    \r\n    .modal-body {\r\n      padding: 2px 16px;\r\n      color: #13294E;\r\n      text-align: center;\r\n    }\r\n    \r\n    .modal-footer {\r\n      padding: 2px 16px;\r\n      background-color: white;\r\n      color:#13294E;\r\n      display: flex; \r\n      justify-content: center;\r\n    }\r\n  \r\n    .close-modal-button {\r\n      border: 2px solid #13294E;; \r\n      background-color:#13294E;; color: white;\r\n      float: right\r\n    }\r\n\r\n  .close-modal-button:hover,\r\n  .close-modal-button:focus {\r\n    color: #000;\r\n    text-decoration: none;\r\n    cursor: pointer;\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "onClick={this.handleClick}",
+					"expression": "renderAbout = () => {\r\n    return (\r\n      <div className=\"modal\" role=\"dialog\">\r\n        <div className=\"modal-dialog modal-lg\">\r\n          <div className=\"modal-content\">\r\n            <div className=\"modal-header\">\r\n              <h3 className=\"modal-title\"><b>About SpeedScore</b>\r\n                <button className=\"close-modal-button\" onClick={this.toggleAbout}>\r\n                  &times;</button>\r\n              </h3>\r\n            </div>\r\n            <div className=\"modal-body\">\r\n              <img\r\n              src=\"https://dl.dropboxusercontent.com/s/awuwr1vpuw1lkyl/SpeedScore4SplashLogo.png\"\r\n              height=\"200\" width=\"200\"/>\r\n              <h3>The World's First and Only Suite of Apps for\r\n              Speedgolf</h3>\r\n              <p>Version CptS 489 Sp20, Build W06C2 (React)<br/>\r\n              &copy; 2017-20 The Professor of Speedgolf. All rights\r\n              reserved.\r\n              </p>\r\n              <div style={{textAlign: \"left\"}}>\r\n                <p>SpeedScore apps support</p>\r\n                <ul>\r\n                <li>live touranment scoring (<i>SpeedScore Live&reg;</i>)</li>\r\n                <li>tracking personal speedgolf rounds and sharing results\r\n                (<i>SpeedScore Track&reg;</i>)</li>\r\n                <li>finding speedgolf-friendly courses, booking tee times, and\r\n                paying to play speedgolf by the minute (<i>SpeedScore\r\n                Play&reg;</i>)</li>\r\n                </ul>\r\n                <p>SpeedScore was first developed by Dr. Chris Hundhausen,\r\n                associate professor of computer science at Washington State\r\n                University and the <i>Professor of Speedgolf</i>, with support\r\n                from Scott Dawley, CEO of Speedgolf USA, LLC. It leverages\r\n                Google server-side technologies.</p>\r\n                <p>For more information on SpeedScore, visit <a\r\n                href=\"http://speedscore.live\" target=\"_blank\">SpeedScore's web\r\n                site</a>. For more information on speedgolf, visit <a\r\n                href=\"http://playspeedgolf.com\"\r\n                target=\"_blank\">playspeedgolf.com</a> and <a\r\n                href=\"http://usaspeedgolf.com\" target=\"_blank\">Speedgolf\r\n                USA</a>.</p>\r\n              </div>\r\n            </div>\r\n            <div className=\"modal-footer\">\r\n              <button className=\"btn btn-primary btncolortheme\"\r\n                onClick={this.toggleAbout}>OK</button>\r\n              </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    );\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": " height: 100%; /* 100% of app */",
+					"expression": " showAbout: false",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -36,16 +36,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//When App component mounts, add a window-level click handler to close the\r\n  //side menu if it is open. This event should fire only if no other lower-level\r\n  //events intercept the click.\r\n  componentDidMount() {\r\n    window.addEventListener(\"click\",this.handleClick);\r\n  }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "//We remove the event listener when the component\r\n//unmounts. This is a best practice. \r\ncomponentWillUnmount() {\r\n  window.removeEventListener(\"click\",this.handleClick);\r\n}",
+					"expression": "toggleAbout = () => {\r\n    this.setState(prevState => ({showAbout: !prevState.showAbout}));\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
