@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
                 <img src="https://drive.google.com/uc?export=view&id=1ZoySWomjxiCnC_R4n9CZWxd_qXzY1IeL" />
             </a>
             <p>
-                <i>Version CptS 489 Sp20</i>
+                <i>Version CptS 489 Sp20 React</i>
             </p>
             <p>
                 <i>© 2020 Professor of Speedgolf. All rights reserved.</i>

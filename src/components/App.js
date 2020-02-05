@@ -50,7 +50,6 @@ class App extends React.Component {
     this.setState({userId: Id});
   }
 
-
   render() {
     const ModePage = modeToPage[this.state.mode];
     return (
@@ -64,7 +63,8 @@ class App extends React.Component {
         <SideMenu 
           mode={this.state.mode}
           menuOpen={this.state.menuOpen}
-          changeMode={this.handleChangeMode}/>
+          changeMode={this.handleChangeMode}
+          userId={this.state.userId}/>
         <ModeBar 
           mode={this.state.mode} 
           changeMode={this.handleChangeMode}

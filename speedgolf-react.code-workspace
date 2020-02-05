@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "  handleSubmit = (event) => {\r\n        event.preventDefault();\r\n        this.props.changeMode(AppMode.FEED);\r\n        this.props.setUserId(/* What to place here? */);\r\n    }",
+					"expression": "/* set width to 250px when menu is open */\r\n.sidemenu-open {\r\n  width: 250px;\r\n}\r\n\r\n/* set width to 0px when menu is closed */\r\n.sidemenu-closed {\r\n  width: 0px;\r\n}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,43 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "handleSubmit = (event) => {\r\n        event.preventDefault();\r\n        this.props.changeMode(AppMode.FEED);\r\n        this.props.setUserId(this.emailInputRef.current.value);\r\n    }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "<form onSubmit={this.handleSubmit}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "handleMenuBtnClick = () => {\r\n      if (this.props.mode != AppMode.LOGIN) {\r\n        this.props.toggleMenuOpen();\r\n      }\r\n    }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "className={\"menubtnicon \" + \r\n                (this.props.menuOpen ? \"fa fa-times\":\"fa fa-bars\")}>",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "className={\"sidemenu-btn-icon \" + \r\n                (this.props.menuOpen ? \"fa fa-times\":\"fa fa-bars\")}>",
+					"expression": "//renderModeItems -- Renders correct subset of mode menu items based on\r\n  //current mode, which is stored in this.prop.mode. Uses switch statement to\r\n  //determine mode.\r\n  renderModeMenuItems = () => {\r\n    switch (this.props.mode) {\r\n      case AppMode.FEED:\r\n        return(\r\n          <div>\r\n          <a className=\"sidemenu-item\">\r\n              <span className=\"fa fa-users\"></span>&nbsp;Followed Users</a>\r\n          <a className=\"menuItem\">\r\n              <span className=\"fa fa-search\"></span>&nbsp;Search Feed</a>\r\n          </div>\r\n        );\r\n      break;\r\n      case AppMode.ROUNDS:\r\n        return(\r\n          <div>\r\n            <a className=\"sidemenu-item\">\r\n              <span className=\"fa fa-plus\"></span>&nbsp;Log New Round</a>\r\n            <a className=\"menuItem\">\r\n              <span className=\"fa fa-search\"></span>&nbsp;Search Rounds</a>\r\n          </div>\r\n        );\r\n      break;\r\n      case AppMode.COURSES:\r\n        return(\r\n          <div>\r\n          <a className=\"sidemenu-item\">\r\n              <span className=\"fa fa-plus\"></span>&nbsp;Add a Course</a>\r\n          <a className=\"sidemenu-item\">\r\n              <span className=\"fa fa-search\"></span>&nbsp;Search Courses</a>\r\n          </div>\r\n        );\r\n      default:\r\n          return null;\r\n      }\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -64,6 +28,78 @@
 				"pattern": {
 					"type": "string",
 					"expression": "import AppMode from '../AppMode.js';",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "render() {\r\n       return (\r\n        <div className= {\"sidemenu \" + \r\n        (this.props.menuOpen ? \"sidemenu-open\" : \"sidemenu-closed\")} >\r\n          {/* SIDE MENU TITLE */}\r\n          <div className=\"sidemenu-title\">\r\n            <img src='http://tiny.cc/chrisprofilepic' height='50' width='50' />\r\n            <span className=\"sidemenu-userID\">&nbsp;{this.props.userId}</span>\r\n          </div>\r\n          {/* MENU CONTENT */}\r\n          {/*Mode-based menu items */}\r\n          {this.renderModeMenuItems()}\r\n          {/* Always-there menu items */}\r\n          <a className=\"sidemenu-item\"><span className=\"fa fa-info-circle\">\r\n              </span>&nbsp;About</a>\r\n          <a className=\"sidemenu-item\"><span className=\"fa fa-sign-out\">\r\n              </span>&nbsp;Log Out</a>\r\n        </div>\r\n        );\r\n    }\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "userId={this.state.userId}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " <div className=\"span-height\" onClick={this.handleClick}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//When the user clicks anywhere on the app and the menu is open, close it.\r\n  //This function takes advantage of event bubbling.\r\n  handleClick = (event) => {\r\n    if (this.state.menuOpen) {\r\n      this.closeMenu();\r\n    }\r\n    event.stopPropagation();\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": ".span-height {\r\n  height: 100%;\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "/* Styling for the divs in the app. Ensures that the content at top isn't obscured by top bar */\r\n.padded-page {\r\npadding: 56px 8px 0px 8px;\r\nheight: 100%; /* 100% of app */\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "<div onClick={this.handleClick}>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//When App component mounts, add a window-level click handler to close the\r\n  //side menu if it is open. This event should fire only if no other lower-level\r\n  //events intercept the click.\r\n  componentDidMount() {\r\n    window.addEventListener(\"click\",this.handleClick);\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
