@@ -50,10 +50,19 @@ class App extends React.Component {
     this.setState({userId: Id});
   }
 
+  //When the user clicks anywhere on the app and the menu is open, close it.
+  //This function takes advantage of event bubbling.
+  handleClick = (event) => {
+    if (this.state.menuOpen) {
+      this.closeMenu();
+    }
+    event.stopPropagation();
+  }
+
   render() {
     const ModePage = modeToPage[this.state.mode];
     return (
-      <div>
+      <div onClick={this.handleClick}>
         <NavBar 
           title={modeTitle[this.state.mode]}
           mode={this.state.mode}
