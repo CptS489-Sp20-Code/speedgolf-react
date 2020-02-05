@@ -9,7 +9,79 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "import React from 'react';\r\n\r\nclass FloatingButton extends React.Component {\r\n  \r\n    render() {\r\n      return(\r\n        <div hidden={true}>\r\n          <a className=\"floatbtn\" onClick={(this.props.menuOpen ? null : \r\n             this.props.handleClick)}>\r\n            <span className={\"floatbtn-icon \" + this.props.icon}></span>\r\n          </a>\r\n        </div>  \r\n      );\r\n    }\r\n}\r\n\r\nexport default FloatingButton;",
+					"expression": "ROUNDS_LOGROUND: \"RoundsMode-LogRound\",\r\n    ROUNDS_EDITROUND: \"RoundsMode-EditRound\",",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " deleteId: \"\",\r\n                        editId: \"\"}; ",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//addRound -- Given an object newData containing a new round, add the round\r\n    //to the current user's list of rounds, commit to local storage, and toggle\r\n    //the mode back to AppMode.ROUNDS since the user is done adding a round.\r\n    addRound = (newData) => {\r\n        let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        let newRounds = this.state.rounds;\r\n        newData.roundNum = this.state.roundCount + 1;\r\n        newRounds[this.state.roundCount + 1] = newData;\r\n        data[this.props.userId].rounds = newRounds;\r\n        data[this.props.userId].roundCount = this.state.roundCount + 1;\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n        this.setState({rounds: newRounds, roundCount: newData.roundNum});\r\n        this.props.changeMode(AppMode.ROUNDS);\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//setDeleteId -- Capture in this.state.deleteId the unique id of the item\r\n    //the user is considering deleting.\r\n    setDeleteId = (val) => {\r\n        this.setState({deleteId: val});\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//setEditId -- Capture in this.state.editId the unique id of the item\r\n    //the user is considering editing.\r\n    setEditId = (val) => {\r\n        this.setState({editId: val});\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//editRound -- Given an object newData containing updated data on an\r\n    //existing round, update the current user's round uniquely identified by\r\n    //this.state.editId, commit to local storage, reset editId to empty and\r\n    //toggle the mode back to AppMode.ROUNDS since the user is done editing the\r\n    //round. \r\n    editRound = (newData) => {\r\n        let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\")); \r\n        let newRounds = this.state.rounds;\r\n        newRounds[this.state.editId] = newData;\r\n        data[this.props.userId].rounds = newRounds;\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n        this.setState({rounds: newRounds, editId: \"\"});\r\n        this.props.changeMode(AppMode.ROUNDS);\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//deleteRound -- Delete the current user's round uniquely identified by\r\n    //this.state.deleteId, commit to local storage, and reset deleteId to empty.\r\n    deleteRound = () => {\r\n        let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        let newRounds = this.state.rounds;\r\n        delete newRounds[this.state.deleteId];\r\n        data[this.props.userId].rounds = newRounds;\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n        this.setState({rounds: newRounds, deleteId: \"\"});\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "import RoundsTable from './RoundsTable.js';\r\nimport RoundForm from './RoundForm.js';\r\nimport FloatingButton from './FloatingButton.js';\r\nimport AppMode from '../AppMode.js';",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//render -- Conditionally render the Rounds mode page as either the rounds\r\n    //table, the rounds form set to obtain a new round, or the rounds form set\r\n    //to edit an existing round.\r\n    render() {\r\n        switch(this.props.mode) {\r\n            case AppMode.ROUNDS:\r\n                return (\r\n                  <React.Fragment>\r\n                  <RoundsTable \r\n                    rounds={this.state.rounds}\r\n                    setEditId={this.setEditId}\r\n                    setDeleteId={this.setDeleteId}\r\n                    deleteRound={this.deleteRound}\r\n                    changeMode={this.props.changeMode}\r\n                    menuOpen={this.props.menuOpen} /> \r\n                  <FloatingButton\r\n                      handleClick={() => \r\n                        this.props.changeMode(AppMode.ROUNDS_LOGROUND)}\r\n                      menuOpen={this.props.menuOpen}\r\n                      icon={\"fa fa-plus\"} />\r\n                  </React.Fragment>\r\n                );\r\n            case AppMode.ROUNDS_LOGROUND:\r\n                return (\r\n                    <RoundForm\r\n                       mode={this.props.mode}\r\n                       startData={\"\"} \r\n                       saveRound={this.addRound} />\r\n                );\r\n            case AppMode.ROUNDS_EDITROUND:\r\n                return (\r\n                    <RoundForm\r\n                      mode={this.props.mode}\r\n                      startData={this.state.rounds[this.state.editId]} \r\n                      saveRound={this.editRound} />\r\n                );\r\n        }\r\n    }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
