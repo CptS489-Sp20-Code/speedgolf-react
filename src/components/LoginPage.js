@@ -20,6 +20,7 @@ class LoginPage extends React.Component {
         this.props.setUserId(this.emailInputRef.current.value);
     }
 
+    
     render() {
         return(
         <div id="login-mode-div" className="padded-page">

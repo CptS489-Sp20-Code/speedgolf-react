@@ -68,16 +68,6 @@ padding-bottom: 5px;
   }
   
 
-/* .sidemenu div {
-      padding: 0px 0px 10px 6px;
-      text-decoration: none;
-      font-size: 16px;
-      color: white;
-      display: block;
-      transition: 0.3s;
-      border-bottom: 2px solid white; 
-  } */
-
 /* Required ordering of link style definitions: visited, hover, active. If out of this order, they won't work!! */
 
 .sidemenu a:visited {
@@ -256,14 +246,15 @@ display:none;
 
 .floatbtn-icon{
   margin-top:22px;
+  color: white;
 }
 
 .floatbtn a:visited {
-  color: white !important;
+  color: white;
 }
 
 .floatbtn a:active {
-  color: white !important;
+  color: white;
 }
 
 body {

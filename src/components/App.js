@@ -5,7 +5,7 @@ import ModeBar from './ModeBar.js';
 import FloatingButton from './FloatingButton.js';
 import LoginPage from './LoginPage.js';
 import FeedPage from './FeedPage.js';
-import RoundsPage from './RoundsPage.js';
+import Rounds from './Rounds.js';
 import CoursesPage from './CoursesPage.js';
 import AppMode from "./../AppMode.js";
 
@@ -13,12 +13,16 @@ const modeTitle = {};
 modeTitle[AppMode.LOGIN] = "Welcome to SpeedScore";
 modeTitle[AppMode.FEED] = "Activity Feed";
 modeTitle[AppMode.ROUNDS] = "My Rounds";
+modeTitle[AppMode.ROUNDS_LOGROUND] = "Log New Round";
+modeTitle[AppMode.ROUNDS_EDITROUND] = "Edit Round";
 modeTitle[AppMode.COURSES] = "Courses";
 
 const modeToPage = {};
 modeToPage[AppMode.LOGIN] = LoginPage;
 modeToPage[AppMode.FEED] = FeedPage;
-modeToPage[AppMode.ROUNDS] = RoundsPage;
+modeToPage[AppMode.ROUNDS] = Rounds;
+modeToPage[AppMode.ROUNDS_LOGROUND] = Rounds;
+modeToPage[AppMode.ROUNDS_EDITROUND] = Rounds;
 modeToPage[AppMode.COURSES] = CoursesPage;
 
 class App extends React.Component {
@@ -152,9 +156,10 @@ componentWillUnmount() {
           mode={this.state.mode} 
           changeMode={this.handleChangeMode}
           menuOpen={this.state.menuOpen}/>
-        <FloatingButton mode={this.state.mode}/>
         <ModePage menuOpen={this.state.menuOpen}
+          mode={this.state.mode} 
           changeMode={this.handleChangeMode}
+          userId={this.state.userId}
           setUserId={this.setUserId}/>
         {this.state.showAbout ? this.renderAbout() : null}
       </div>
