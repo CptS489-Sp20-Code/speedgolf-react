@@ -41,6 +41,15 @@
 					"wholeMatch": false
 				},
 				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "renderAbout = () => {\r\n    return (\r\n      <div className=\"modal\" role=\"dialog\">\r\n        <div className=\"modal-dialog modal-lg\">\r\n          <div className=\"modal-content\">\r\n            <div className=\"modal-header\">\r\n              <h3 className=\"modal-title\"><b>About SpeedScore</b>\r\n                <button className=\"close-modal-button\" onClick={this.toggleAbout}>\r\n                  &times;</button>\r\n              </h3>\r\n            </div>\r\n            <div className=\"modal-body\">\r\n              <img\r\n              src=\"https://dl.dropboxusercontent.com/s/awuwr1vpuw1lkyl/SpeedScore4SplashLogo.png\"\r\n              height=\"200\" width=\"200\"/>\r\n              <h3>The World's First and Only Suite of Apps for\r\n              Speedgolf</h3>\r\n              <p>Version CptS 489 Sp20, Build W06C2 (React)<br/>\r\n              &copy; 2017-20 The Professor of Speedgolf. All rights\r\n              reserved.\r\n              </p>\r\n              <div style={{textAlign: \"left\"}}>\r\n                <p>SpeedScore apps support</p>\r\n                <ul>\r\n                <li>live touranment scoring (<i>SpeedScore Live&reg;</i>)</li>\r\n                <li>tracking personal speedgolf rounds and sharing results\r\n                (<i>SpeedScore Track&reg;</i>)</li>\r\n                <li>finding speedgolf-friendly courses, booking tee times, and\r\n                paying to play speedgolf by the minute (<i>SpeedScore\r\n                Play&reg;</i>)</li>\r\n                </ul>\r\n                <p>SpeedScore was first developed by Dr. Chris Hundhausen,\r\n                associate professor of computer science at Washington State\r\n                University and the <i>Professor of Speedgolf</i>, with support\r\n                from Scott Dawley, CEO of Speedgolf USA, LLC. It leverages\r\n                Google server-side technologies.</p>\r\n                <p>For more information on SpeedScore, visit <a\r\n                href=\"http://speedscore.live\" target=\"_blank\">SpeedScore's web\r\n                site</a>. For more information on speedgolf, visit <a\r\n                href=\"http://playspeedgolf.com\"\r\n                target=\"_blank\">playspeedgolf.com</a> and <a\r\n                href=\"http://usaspeedgolf.com\" target=\"_blank\">Speedgolf\r\n                USA</a>.</p>\r\n              </div>\r\n            </div>\r\n            <div className=\"modal-footer\">\r\n              <button className=\"btn btn-primary btn-color-theme\"\r\n                onClick={this.toggleAbout}>OK</button>\r\n              </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    );\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
 			}
 		]
 	}

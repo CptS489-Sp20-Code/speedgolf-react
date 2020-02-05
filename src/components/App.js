@@ -123,7 +123,7 @@ componentWillUnmount() {
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-primary btncolortheme"
+              <button className="btn btn-primary btn-color-theme"
                 onClick={this.toggleAbout}>OK</button>
               </div>
           </div>
