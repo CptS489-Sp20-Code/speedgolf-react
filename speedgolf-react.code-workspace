@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "RoundsTable",
+					"expression": "{this.state.confirmDelete ? this.renderConfirmDeleteDialog() : null}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//renderTable -- render an HTML table displaying the rounds logged\r\n  //by the current user and providing buttons to view/edit and delete each round.\r\n  renderTable = () => {\r\n    let table = [];\r\n    for (const r in this.props.rounds) {\r\n      table.push(\r\n        <tr key={r}>\r\n          <td>{this.props.rounds[r].date}</td>\r\n          <td>{this.props.rounds[r].course}</td>\r\n          <td>{(Number(this.props.rounds[r].strokes) + \r\n                Number(this.props.rounds[r].minutes)) +\r\n              \":\" + this.props.rounds[r].seconds + \" (\" + \r\n              this.props.rounds[r].strokes + \r\n              \" in \" + this.props.rounds[r].minutes + \":\" + \r\n              this.props.rounds[r].seconds + \")\"}\r\n          </td>\r\n          <td><button onClick={this.props.menuOpen ? null : () => \r\n            this.editRound(r)}>\r\n                <span className=\"fa fa-eye\"></span></button></td>\r\n          <td><button onClick={this.props.menuOpen ? null : \r\n            () => this.confirmDelete(r)}>\r\n                <span className=\"fa fa-trash\"></span></button></td>\r\n        </tr> \r\n    );\r\n  }\r\n  return table;\r\n  }",
+					"expression": "//renderConfirmDeleteDialog: presents user with dialog to confirm deletion\r\n  //of round. Credit: https://getbootstrap.com/docs/4.0/components/modal/\r\n  renderConfirmDeleteDialog = () => {\r\n      return (\r\n        <div className=\"modal\" role=\"dialog\">\r\n          <div className=\"modal-content\">\r\n              <div className=\"modal-header\">\r\n                <p className=\"modal-title\">Confirm Round Deletion</p>\r\n                  <button className=\"close-modal-button\" onClick={this.cancelDelete}>\r\n                    &times;</button>\r\n              </div>\r\n              <div className=\"modal-body\">\r\n                <h4>Are you sure that you want to delete this round?</h4>\r\n                <div className=\"modal-footer\">\r\n                    <button className=\"btn btn-primary btn-color-scheme\"\r\n                      onClick={this.doDelete}>\r\n                    Yes, delete round</button>\r\n                    <button className=\"btn btn-secondary\" \r\n                      onClick={this.cancelDelete}>\r\n                    No, do not delete round</button>\r\n                </div>\r\n              </div>\r\n          </div>\r\n        </div>\r\n      );\r\n    }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "{Object.keys(this.props.rounds).length === 0 ? \r\n            <tr>\r\n            <td colSpan=\"5\" style={{fontStyle: \"italic\"}}>No rounds logged</td>\r\n            </tr> : this.renderTable()\r\n            }",
+					"expression": "//doDelete -- Triggered when the user clicks on the \"Yes Delete\" button in\r\n    //the confirm delete dialog box. Call upon parent component's deleteRound to\r\n    //to actually performt he deletion of the round currently flagged for\r\n    //deletion and toggle the confirmDelete state variable to hide the confirm\r\n    //dialog box.\r\n    doDelete = () => {\r\n      this.props.deleteRound();\r\n      this.setState({confirmDelete: false});\r\n    }\r\n\r\n  //cancelDelete -- Triggered when the user chooses to cancel a delete\r\n  //operation. We just need to update state to toggle confirmDelete to false\r\n  cancelDelete = () => {\r\n    this.props.setDeleteId(\"\"); \r\n    this.setState({confirmDelete: false});\r\n  }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -36,7 +36,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "mode={this.state.mode} ",
+					"expression": "this.setState({confirmDelete: true});",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -45,88 +45,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "constructor(props) {\r\n        super(props);\r\n        //Create date object for today, taking time zone into consideration\r\n        let today = new Date(Date.now()-(new Date()).getTimezoneOffset()*60000);\r\n        //store date as ISO string\r\n        if (this.props.mode === AppMode.ROUNDS_LOGROUND) {\r\n          //If logging a new round, the starting state is a default round with\r\n          //today's date.\r\n          this.state = {date:  today.toISOString().substr(0,10), \r\n                      course: \"\",\r\n                      type: \"practice\",\r\n                      holes: \"18\",\r\n                      strokes: 80,\r\n                      minutes: 50,\r\n                      seconds: \"00\",\r\n                      notes: \"\",\r\n                      faIcon: \"fa fa-save\",\r\n                      btnLabel: \"Save Round Data\"}\r\n        } else {\r\n          //if editing an existing round, the starting state is the round's\r\n          //current data\r\n          this.state = this.props.startData;\r\n          this.state.faIcon = \"fa fa-edit\";\r\n          this.state.btnLabel = \"Update Round Data\";\r\n        }\r\n    }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "modeToPage[AppMode.ROUNDS_LOGROUND] = Rounds;\r\nmodeToPage[AppMode.ROUNDS_EDITROUND] = Rounds;",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "modeTitle[AppMode.ROUNDS_LOGROUND] = \"Log New Round\";\r\nmodeTitle[AppMode.ROUNDS_EDITROUND] = \"Edit Round\";",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "ROUNDS_LOGROUND: \"RoundsMode-LogRound\",\r\n    ROUNDS_EDITROUND: \"RoundsMode-EditRound\",",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": " //renderTable -- render an HTML table displaying the rounds logged\r\n    //by the current user and providing buttons to view/edit and delete each round.\r\n    renderTable = () => {\r\n      let table = [];\r\n      for (const r in this.props.rounds) {\r\n        table.push(\r\n          <tr key={r}>\r\n            <td>{this.props.rounds[r].date}</td>\r\n            <td>{this.props.rounds[r].course}</td>\r\n            <td>{(Number(this.props.rounds[r].strokes) + \r\n                  Number(this.props.rounds[r].minutes)) +\r\n                 \":\" + this.props.rounds[r].seconds + \" (\" + \r\n                 this.props.rounds[r].strokes + \r\n                 \" in \" + this.props.rounds[r].minutes + \":\" + \r\n                 this.props.rounds[r].seconds + \")\"}\r\n            </td>\r\n            <td><button onClick={this.props.menuOpen ? null : () => this.editRound(r)}>\r\n                  <span className=\"fa fa-eye\"></span></button></td>\r\n            <td><button onClick={this.props.menuOpen ? null : () => this.confirmDelete(r)}>\r\n                  <span className=\"fa fa-trash\"></span></button></td>\r\n          </tr> \r\n      );\r\n    }\r\n    return table;\r\n  }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "render() {\r\n       return (\r\n        <div className=\"navbar\">  \r\n        <span className=\"navbar-items\">\r\n          <button className=\"sidemenu-btn\" onClick={this.handleMenuBtnClick}>\r\n            <span id=\"sidemenu-btn-icon\" \r\n              className={\"sidemenu-btn-icon \" + this.getMenuBtnIcon()}>\r\n            </span>\r\n          </button>\r\n          <img src=\"http://tiny.cc/sslogo\" alt=\"Speed Score Logo\" height=\"38px\"\r\n          width=\"38px\" />\r\n          <span id=\"topBarTitle\" className=\"navbar-title\">\r\n            &nbsp;{this.props.title}\r\n          </span>\r\n        </span>\r\n      </div>\r\n    ); \r\n  }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "getMenuBtnIcon = () => {\r\n      if (this.props.mode === AppMode.ROUNDS_LOGROUND || \r\n          this.props.mode === AppMode.ROUNDS_EDITROUND)\r\n          return \"fa fa-arrow-left\";\r\n      if (this.props.menuOpen)\r\n        return \"fa fa-times\";\r\n      return \"fa fa-bars\";\r\n    }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": " handleMenuBtnClick = () => {\r\n      if (this.props.mode === AppMode.ROUNDS_LOGROUND ||\r\n          this.props.mode === AppMode.ROUNDS_EDITROUND) {\r\n        this.props.changeMode(AppMode.ROUNDS);\r\n      } else if (this.props.mode != AppMode.LOGIN) {\r\n        this.props.toggleMenuOpen();\r\n      }\r\n    }",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "import React from 'react';\r\nimport AppMode from '../AppMode.js';\r\n\r\n//RoundForm -- this component presents a controlled form through which the user\r\n//can enter a new round or edit an existing round.\r\nclass RoundForm extends React.Component {\r\n    constructor(props) {\r\n      super(props);\r\n      //Create date object for today, taking time zone into consideration\r\n      let today = new Date(Date.now()-(new Date()).getTimezoneOffset()*60000);\r\n      //store date as ISO string\r\n      if (this.props.mode === AppMode.ROUNDS_LOGROUND) {\r\n        //If logging a new round, the starting state is a default round with\r\n        //today's date.\r\n        this.state = {date:  today.toISOString().substr(0,10), \r\n                    course: \"\",\r\n                    type: \"practice\",\r\n                    holes: \"18\",\r\n                    strokes: 80,\r\n                    minutes: 50,\r\n                    seconds: \"00\",\r\n                    notes: \"\",\r\n                    faIcon: \"fa fa-save\",\r\n                    btnLabel: \"Save Round Data\"}\r\n      } else {\r\n        //if editing an existing round, the starting state is the round's\r\n        //current data\r\n        this.state = this.props.startData;\r\n        this.state.faIcon = \"fa fa-edit\";\r\n        this.state.btnLabel = \"Update Round Data\";\r\n      }\r\n  }\r\n  \r\n  //handleChange -- Look for changes to the seconds field, padding any entry\r\n  //less than 10 with a 0 so that seconds are displayed properly.\r\n  handleChange = (event) => {\r\n      const name = event.target.name;\r\n      if (name === \"seconds\") {\r\n        this.setState({seconds: (event.target.value.length < 2 ? \"0\" + event.target.value : \r\n          event.target.value)});\r\n      } else {\r\n        this.setState({[name]: event.target.value});\r\n      }\r\n    }\r\n  \r\n    //handleSubmit -- When the user clicks on the button to save/update the\r\n    //round, start the spinner and invoke the parent component's saveRound\r\n    //method to do the actual work. Note that saveRound is set to the correct\r\n    //parent method based on whether the user is logging a new round or editing\r\n    //an existing round.\r\n    handleSubmit = (event) => {\r\n      //start spinner\r\n      this.setState({faIcon: \"fa fa-spin fa-spinner\",\r\n                     btnLabel: (this.props.mode === AppMode.ROUNDS_LOGROUND ? \r\n                                  \"Saving...\" : \"Updating...\")});\r\n      //Prepare current round data to be saved\r\n      let roundData = this.state;\r\n      delete roundData.faIcon;\r\n      delete roundData.btnLabel;\r\n      //call saveRound on 1 second delay to show spinning icon\r\n      setTimeout(this.props.saveRound,1000,roundData); \r\n      event.preventDefault(); \r\n    }\r\n    \r\n    //computeSGS -- properly computes speedgolf score based on the values of the\r\n    //strokes, minutes and seconds fields. We choose not to save SGS in state\r\n    //it can be readily computed.\r\n    computeSGS = () => {\r\n      return (Number(this.state.strokes) + Number(this.state.minutes)) \r\n                  + \":\" + this.state.seconds;\r\n    }\r\n  \r\n    //render -- renders the form to enter round data.\r\n    render() {\r\n      return (\r\n        <div className = \"padded-page\">\r\n        <form onSubmit={this.handleSubmit}>\r\n          <center>\r\n            <label>\r\n              Date:\r\n              <input name=\"date\" className=\"form-control form-center\" \r\n                type=\"date\" value={this.state.date} onChange={this.handleChange} />\r\n            </label>\r\n            <p></p>\r\n            <label>\r\n              Course:\r\n              <input name=\"course\" className=\"form-control form-center\" type=\"text\"\r\n                value={this.state.course} onChange={this.handleChange}\r\n                placeholder=\"Course played\" size=\"50\" maxLength=\"50\" />\r\n            </label>\r\n          <p></p>\r\n          <label>Type:\r\n          <select name=\"type\" value={this.state.type} \r\n            className=\"form-control form-center\" onChange={this.handleChange}>\r\n            <option value=\"practice\">Practice</option>\r\n            <option value=\"tournament\">Tournament</option>\r\n          </select> \r\n          </label>\r\n          <p></p>\r\n          <label># Holes:\r\n          <select name=\"holes\" value={this.state.holes} \r\n            className=\"form-control form-center\" onChange={this.handleChange}>\r\n            <option value=\"9\">9</option>\r\n            <option value=\"18\">18</option>\r\n          </select> \r\n          </label>\r\n          <p></p>\r\n          <label># Strokes:\r\n          <input name=\"strokes\" className=\"form-control form-center\" type=\"number\" \r\n            min=\"9\" max=\"200\" value={this.state.strokes} \r\n            onChange={this.handleChange} />\r\n          </label>\r\n          <p></p>\r\n          <label>Time: <br></br>\r\n          <input name=\"minutes\" type=\"number\" size=\"3\"\r\n            min=\"10\" max=\"400\" value={this.state.minutes}\r\n            onChange={this.handleChange} />:  \r\n          <input name=\"seconds\" type=\"number\" size=\"2\"\r\n            min=\"0\" max=\"60\" value={this.state.seconds} onChange={this.handleChange} />\r\n          </label>\r\n          <p></p>\r\n          <label>Speedgolf Score: <br></br>\r\n              <input name=\"SGS\" className=\"form-center\" type=\"text\" size=\"6\" \r\n                disabled={true} value={this.computeSGS()} />\r\n          </label>\r\n          <p></p>\r\n          <label>Notes:\r\n              <textarea name=\"notes\" className=\"form-control\" rows=\"6\" cols=\"75\" \r\n                placeholder=\"Enter round notes\" value={this.state.notes} onChange={this.handleChange} />\r\n          </label>\r\n          <p></p>\r\n          <p></p>\r\n          <button type=\"submit\" style={{width: \"70%\",fontSize: \"36px\"}} \r\n            className=\"btn btn-primary btn-color-theme\">\r\n              <span className={this.state.faIcon}/>&nbsp;{this.state.btnLabel}</button>\r\n          </center>\r\n        </form>\r\n        </div>\r\n      );\r\n    }\r\n}\r\n\r\n  export default RoundForm;",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "//editRound -- Triggered when the user clicks the edit button for a given\r\n    //round. The id param is the unique property that identifies the round.\r\n    //Set the state variable representing the id of the round to be edited and\r\n    //then switch to the ROUNDS_EDITROUND mode to allow the user to edit the\r\n    //chosen round.\r\n    editRound = (id) => {\r\n      this.props.setEditId(id);\r\n      this.props.changeMode(AppMode.ROUNDS_EDITROUND);\r\n    }\r\n\r\n    //confirmDelete -- Triggered when the user clicks on the delete button\r\n    //associated with a given round. The id param is the unique property that\r\n    //identifies the round. Set the state variable representing the id\r\n    //of the item to be deleted and set the confirmDelete state variable to true\r\n    //to force a re-render with the confirm delete modal dialog box showing.\r\n    confirmDelete = (id) => {\r\n     alert(\"Confirm Delete Goes Here!\")\r\n    }",
+					"expression": "this.props.setDeleteId(id);",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
