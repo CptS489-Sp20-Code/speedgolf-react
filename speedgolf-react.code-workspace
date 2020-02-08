@@ -50,6 +50,87 @@
 					"wholeMatch": false
 				},
 				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "<button\r\n                type=\"submit\"\r\n                className=\"btn-color-theme btn btn-primary btn-block login-btn\">\r\n                <span className={this.state.loginBtnIcon}/>\r\n                &nbsp;{this.state.loginBtnLabel}\r\n            </button>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " this.state = {loginBtnIcon: \"fa fa-sign-in\",\r\n        loginBtnLabel: \"Log In\"};",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " this.state = {loginBtnIcon: \"fa fa-sign-in\",\r\n                    loginBtnLabel: \"Log In\"};",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleSubmit -- Called when user clicks on login button. Initiate spinner\r\n  //for 1 second and call handleLogin to do the work.\r\n  handleSubmit = (event) => {\r\n    this.setState({loginBtnIcon: \"fa fa-spin fa-spinner\",\r\n                   loginBtnLabel: \"Logging In...\"});\r\n    //Initiate spinner for 1 second\r\n    setTimeout(this.handleLogin,1000);\r\n    event.preventDefault();\r\n  }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "<button\r\n            type=\"submit\"\r\n            className=\"btn-color-theme btn btn-primary btn-block login-btn\">\r\n            <span className={this.state.loginBtnIcon}/>\r\n            &nbsp;{this.state.loginBtnLabel}\r\n        </button>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleLogin -- Callback function that sets up initial app state upon login.\r\nhandleLogin = () => {\r\n    //Set the userId of current user\r\n    let thisUser = this.emailInputRef.current.value;\r\n    this.props.setUserId(thisUser);\r\n    //Check whether we have saved data on this (or any) user:\r\n    let data = localStorage.getItem(\"speedgolfUserData\");\r\n    if (data == null) { \r\n      //No user app data stored yet -- create blank record for current user\r\n      localStorage.setItem(\"speedgolfUserData\",\r\n      JSON.stringify({[thisUser] : {\"rounds\" : {}, \"roundCount\": 0}}));  \r\n    } else {\r\n      //app data exists -- check if data exists for thisUser\r\n      data = JSON.parse(data);\r\n      if  (!data.hasOwnProperty(thisUser)) { \r\n          //No data for this user -- create empty data\r\n          data[thisUser] = {\"rounds\": {}, \"roundCount\": 0}; \r\n          localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n      } \r\n    }  \r\n    //Trigger switch to FEED mode\r\n    this.props.changeMode(AppMode.FEED);\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "this.setState({loginBtnIcon: \"fa fa-sign-in\",\r\n                   loginBtnLabel: \"Log In\"});",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "handleLogin = () => {\r\n    this.setState({loginBtnIcon: \"fa fa-sign-in\",\r\n                   loginBtnLabel: \"Log In\"});\r\n    //Set the userId of current user\r\n    let thisUser = this.emailInputRef.current.value;\r\n    this.props.setUserId(thisUser);\r\n    //Check whether we have saved data on this (or any) user:\r\n    let data = localStorage.getItem(\"speedgolfUserData\");\r\n    if (data == null) { \r\n      //No user app data stored yet -- create blank record for current user\r\n      localStorage.setItem(\"speedgolfUserData\",\r\n      JSON.stringify({[thisUser] : {\"rounds\" : {}, \"roundCount\": 0}}));  \r\n    } else {\r\n      //app data exists -- check if data exists for thisUser\r\n      data = JSON.parse(data);\r\n      if  (!data.hasOwnProperty(thisUser)) { \r\n          //No data for this user -- create empty data\r\n          data[thisUser] = {\"rounds\": {}, \"roundCount\": 0}; \r\n          localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n      } \r\n    }  \r\n    //Trigger switch to FEED mode\r\n    this.props.changeMode(AppMode.FEED);\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleSubmit -- Called when user clicks on login button. Initiate spinner\r\n//for 1 second and call handleLogin to do the work.\r\nhandleSubmit = (event) => {\r\nthis.setState({loginBtnIcon: \"fa fa-spin fa-spinner\",\r\n                loginBtnLabel: \"Logging In...\"});\r\n//Initiate spinner for 1 second\r\nsetTimeout(this.handleLogin,1000);\r\nevent.preventDefault();\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
 			}
 		]
 	}
