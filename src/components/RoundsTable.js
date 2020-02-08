@@ -108,7 +108,7 @@ class RoundsTable extends React.Component {
   //Rounds Logged" message in case the table is empty.
   render() {
     return(
-    <div className="paddedPage">
+    <div className="padded-page">
       <h1></h1>
       <table className="table table-hover">
         <thead className="thead-light">
