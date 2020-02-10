@@ -70,7 +70,22 @@ class LoginPage extends React.Component {
     //new object for user, save to localStorage and take user to app's landing page. 
     handleCreateAccount = (event) => {
         event.preventDefault();
-        //TO DO: update local storage to create account
+        let data = JSON.parse(localStorage.getItem("speedgolfUserData"));
+        //Create fresh user data object for new user
+        if (data == null) {
+            data = {}; //create empty data object
+        }
+        data[this.state.accountName] = {
+            accountInfo: {
+            password: this.state.accountPassword,
+            securityQuestion: this.state.accountSecurityQuestion,
+            securityAnswer: this.state.accountSecurityAnswer
+            },
+            rounds: {}, 
+            roundCount: 0
+        };
+        //Commit to localStorage:
+        localStorage.setItem("speedgolfUserData",JSON.stringify(data));
         //Set current user
         this.props.setUserId(this.state.accountName);
         //Log in user by switching to FEED mode

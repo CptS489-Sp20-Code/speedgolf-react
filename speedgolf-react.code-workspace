@@ -9,25 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "ref={this.newUserRef}",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "this.newUserRef = React.createRef();",
-					"ignoreCase": false,
-					"wholeMatch": false
-				},
-				"color": "yellow"
-			},
-			{
-				"pattern": {
-					"type": "string",
-					"expression": "let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        if (data != null && data.hasOwnProperty(this.state.accountName)) {\r\n            //The user name is already taken\r\n            this.newUserRef.current.setCustomValidity(\"An account already exists under this email address. Use 'Reset password' to recover the password.\");\r\n        } else {\r\n            this.newUserRef.current.setCustomValidity(\"\");\r\n        }",
+					"expression": "let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        //Create fresh user data object for new user\r\n        if (data == null) {\r\n            data = {}; //create empty data object\r\n        }\r\n        data[this.state.accountName] = {\r\n            accountInfo: {\r\n            password: this.state.accountPassword,\r\n            securityQuestion: this.state.accountSecurityQuestion,\r\n            securityAnswer: this.state.accountSecurityAnswer\r\n            },\r\n            rounds: {}, \r\n            roundCount: 0\r\n        };\r\n        //Commit to localStorage:\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
