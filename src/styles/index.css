@@ -283,9 +283,22 @@ body {
   font-size: 24px;
 }
 
+.form-text {
+  text-align: center;
+}
+
+.form-submit-btn {
+  width: 90%;
+  font-size: 18px;
+}
+
 .login-btn {
   width: 70%;
   font-size: 36px;
+}
+
+.login-link {
+  color:  #13294E;
 }
 
 /* Form styling */
@@ -293,7 +306,4 @@ body {
 .form-center {
   text-align: center;
 }
-
-
-
 

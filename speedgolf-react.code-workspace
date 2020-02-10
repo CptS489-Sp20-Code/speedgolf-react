@@ -9,7 +9,115 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": " <a className=\"sidemenu-item\" onClick={() => this.props.changeMode(AppMode.LOGIN)}><span className=\"fa fa-sign-out\">\r\n              </span>&nbsp;Log Out</a>",
+					"expression": "<button\r\n            type=\"submit\"\r\n            className=\"btn-color-theme btn btn-primary btn-block login-btn\">\r\n            <span className={this.state.loginBtnIcon}/>\r\n            &nbsp;{this.state.loginBtnLabel}\r\n        </button>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": ".login-link {\r\n  color:  #13294E;\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "loginBtnIcon: \"fa fa-sign-in\",\r\n                      loginBtnLabel: \"Log In\",",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "<p><button type=\"button\" className=\"btn btn-link login-link\" \r\n             onClick={() => {this.setState({showAccountDialog: true});}}>Create an account</button> | \r\n           <button type=\"button\" className=\"btn btn-link login-link\"\r\n             onClick={() => {this.setState({showPasswordDialog: true});}}>Reset your password</button>\r\n        </p>",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " {this.state.showAccountDialog ? this.renderAccountDialog() : null}\r\n        {this.state.showPasswordDialog ? this.renderPasswordDialog() : null}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//renderAccountDialog -- Present the \"create account\" dialog\r\n    renderAccountDialog = () => {\r\n        return (\r\n        <div className=\"modal\" role=\"dialog\">\r\n          <div className=\"modal-dialog modal-lg\">\r\n            <div className=\"modal-content\">\r\n              <div className=\"modal-header\">\r\n                <h3 className=\"modal-title\"><b>Create New Account</b>\r\n                  <button className=\"close-modal-button\" \r\n                    onClick={() => {this.setState({showAccountDialog: false})}}>\r\n                    &times;</button>\r\n                </h3>\r\n              </div>\r\n              <div className=\"modal-body\">\r\n                <form onSubmit={this.handleCreateAccount}>\r\n                <label>\r\n                    Email: \r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountName\"\r\n                    type=\"email\"\r\n                    size=\"35\"\r\n                    placeholder=\"Enter Email Address\"\r\n                    pattern=\"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\"\r\n                    required={true}\r\n                    value={this.state.accountName}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Password:\r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountPassword\"\r\n                    type=\"password\"\r\n                    size=\"35\"\r\n                    placeholder=\"Enter Password\"\r\n                    pattern=\"(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$\"\r\n                    required={true}\r\n                    value={this.state.accountPassword}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Repeat Password:\r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountPasswordRepeat\"\r\n                    type=\"password\"\r\n                    size=\"35\"\r\n                    placeholder=\"Repeat Password\"\r\n                    required={true}\r\n                    ref={this.repeatPassRef}\r\n                    value={this.state.accountPasswordRepeat}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Security Question:\r\n                    <textarea\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountSecurityQuestion\"\r\n                    size=\"35\"\r\n                    placeholder=\"Security Question\"\r\n                    rows=\"2\"\r\n                    cols=\"35\"\r\n                    maxLength=\"100\"\r\n                    required={true}\r\n                    value={this.state.accountSecurityQuestion}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                <label>\r\n                    Answer to Security Question:\r\n                    <textarea\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountSecurityAnswer\"\r\n                    type=\"text\"\r\n                    placeholder=\"Answer\"\r\n                    rows=\"2\"\r\n                    cols=\"35\"\r\n                    maxLength=\"100\"\r\n                    required={true}\r\n                    value={this.state.accountSecurityAnswer}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                <button role=\"submit\" className=\"btn btn-primary btn-color-theme form-submit-btn\">\r\n                    <span className=\"fa fa-user-plus\"></span>&nbsp;Create Account\r\n                </button>\r\n                </form>\r\n            </div>\r\n          </div>\r\n        </div>\r\n    </div>\r\n    );\r\n\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "showAccountDialog: false,\r\n                      showPasswordDialog: false,\r\n                      accountName: \"\",\r\n                      accountPassword: \"\",\r\n                      accountPasswordRepeat: \"\",\r\n                      accountSecurityQuestion: \"\",\r\n                      accountSecurityAnswer: \"\"};",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleNewAccountChange -- Called when a field in a dialog box form changes.\r\n    //Update corresponding state variable and potentially update the custom\r\n    //message.\r\n    handleNewAccountChange = (event) => {\r\n        this.setState({[event.target.name]: event.target.value},this.checkAccountValidity);\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " //renderAccountDialog -- Present the \"create account\" dialog\r\n    renderAccountDialog = () => {\r\n        return (\r\n        <div className=\"modal\" role=\"dialog\">\r\n          <div className=\"modal-dialog modal-lg\">\r\n            <div className=\"modal-content\">\r\n              <div className=\"modal-header\">\r\n                <h3 className=\"modal-title\"><b>Create New Account</b>\r\n                  <button className=\"close-modal-button\" \r\n                    onClick={() => {this.setState({showAccountDialog: false})}}>\r\n                    &times;</button>\r\n                </h3>\r\n              </div>\r\n              <div className=\"modal-body\">\r\n                <form onSubmit={this.handleCreateAccount}>\r\n                <label>\r\n                    Email: \r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountName\"\r\n                    type=\"email\"\r\n                    size=\"35\"\r\n                    placeholder=\"Enter Email Address\"\r\n                    pattern=\"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\"\r\n                    required={true}\r\n                    value={this.state.accountName}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Password:\r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountPassword\"\r\n                    type=\"password\"\r\n                    size=\"35\"\r\n                    placeholder=\"Enter Password\"\r\n                    pattern=\"(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$\"\r\n                    required={true}\r\n                    ref={this.repeatPassRef}\r\n                    value={this.state.accountPassword}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Repeat Password:\r\n                    <input\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountPasswordRepeat\"\r\n                    type=\"password\"\r\n                    size=\"35\"\r\n                    placeholder=\"Repeat Password\"\r\n                    required={true}\r\n                    ref={this.repeatPassRef}\r\n                    value={this.state.accountPasswordRepeat}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                \r\n                <label>\r\n                    Security Question:\r\n                    <textarea\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountSecurityQuestion\"\r\n                    size=\"35\"\r\n                    placeholder=\"Security Question\"\r\n                    rows=\"2\"\r\n                    cols=\"35\"\r\n                    maxLength=\"100\"\r\n                    required={true}\r\n                    value={this.state.accountSecurityQuestion}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                <label>\r\n                    Answer to Security Question:\r\n                    <textarea\r\n                    className=\"form-control form-text\"\r\n                    name=\"accountSecurityAnswer\"\r\n                    type=\"text\"\r\n                    placeholder=\"Answer\"\r\n                    rows=\"2\"\r\n                    cols=\"35\"\r\n                    maxLength=\"100\"\r\n                    required={true}\r\n                    value={this.state.accountSecurityAnswer}\r\n                    onChange={this.handleNewAccountChange}\r\n                    />\r\n                </label>\r\n                <button role=\"submit\" className=\"btn btn-primary btn-color-theme form-submit-btn\">\r\n                    <span className=\"fa fa-user-plus\"></span>&nbsp;Create Account\r\n                </button>\r\n                </form>\r\n            </div>\r\n          </div>\r\n        </div>\r\n    </div>\r\n    );\r\n\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "this.repeatPassRef = React.createRef();",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "if (this.state.accountPassword != this.state.accountPasswordRepeat) {\r\n            //Passwords don't match\r\n            this.repeatPassRef.current.setCustomValidity(\r\n              \"This password must match original password.\");\r\n        } else {\r\n            this.repeatPassRef.current.setCustomValidity(\"\");\r\n        }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//checkAccountValidity -- Callback function invoked after a form element in\r\n    //the 'Create Account' dialog box changes and component state has been\r\n    //updated. We need to check whether the passwords match and whether an\r\n    //account is already associated with the email address entered. If so, we\r\n    //set a custom validity message to be displayed when the user clicks the\r\n    //'Create Account' button. Otherwise, we reset the custom validity message\r\n    //to empty so that it will NOT fire when the user clicks 'Create Account'.\r\n    checkAccountValidity = () => {\r\n        if (this.state.accountPassword != this.state.accountPasswordRepeat) {\r\n            //Passwords don't match\r\n            this.repeatPassRef.current.setCustomValidity(\"This password must match original password.\");\r\n        } else {\r\n            this.repeatPassRef.current.setCustomValidity(\"\");\r\n        }\r\n    }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " //handleCreateAccount -- Triggered when user clicks on \"Create Account.\"\r\n    //Custom data checking ensures user account under this email does not exist\r\n    //and that the rest of the info is valid. At this point, we can create \r\n    //new object for user, save to localStorage and take user to app's landing page. \r\n    handleCreateAccount = (event) => {\r\n        event.preventDefault();\r\n        //TO DO: update local storage to create account\r\n        //Set current user\r\n        this.props.setUserId(this.state.accountName);\r\n        //Log in user by switching to FEED mode\r\n        this.props.changeMode(AppMode.FEED);\r\n    }",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
