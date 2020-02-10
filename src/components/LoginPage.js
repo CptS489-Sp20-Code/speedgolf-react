@@ -8,6 +8,7 @@ class LoginPage extends React.Component {
         //Create a ref for the email input DOM element
         this.emailInputRef = React.createRef();
         this.repeatPassRef = React.createRef();
+        this.newUserRef = React.createRef();
         this.state = {loginBtnIcon: "fa fa-sign-in",
                       loginBtnLabel: "Log In",
                       showAccountDialog: false,
@@ -46,6 +47,13 @@ class LoginPage extends React.Component {
             this.repeatPassRef.current.setCustomValidity("This password must match original password.");
         } else {
             this.repeatPassRef.current.setCustomValidity("");
+        }
+        let data = JSON.parse(localStorage.getItem("speedgolfUserData"));
+        if (data != null && data.hasOwnProperty(this.state.accountName)) {
+            //The user name is already taken
+            this.newUserRef.current.setCustomValidity("An account already exists under this email address. Use 'Reset password' to recover the password.");
+        } else {
+            this.newUserRef.current.setCustomValidity("");
         }
     }
     
@@ -93,6 +101,7 @@ class LoginPage extends React.Component {
                     size="35"
                     placeholder="Enter Email Address"
                     pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+                    ref={this.newUserRef}
                     required={true}
                     value={this.state.accountName}
                     onChange={this.handleNewAccountChange}
