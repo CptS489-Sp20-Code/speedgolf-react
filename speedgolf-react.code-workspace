@@ -9,7 +9,52 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        //Create fresh user data object for new user\r\n        if (data == null) {\r\n            data = {}; //create empty data object\r\n        }\r\n        data[this.state.accountName] = {\r\n            accountInfo: {\r\n            password: this.state.accountPassword,\r\n            securityQuestion: this.state.accountSecurityQuestion,\r\n            securityAnswer: this.state.accountSecurityAnswer\r\n            },\r\n            rounds: {}, \r\n            roundCount: 0\r\n        };\r\n        //Commit to localStorage:\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));",
+					"expression": "ref={this.passwordInputRef}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "this.passwordInputRef = React.createRef();",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "onChange={this.handleLoginChange}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleLoginChange -- Check the validity of the username (email address)\r\n//password entered into the login page, setting the customValidity message \r\n//appropriately. \r\nhandleLoginChange = (event) => {\r\n    let thisUser = this.emailInputRef.current.value;\r\n    let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n    //Check username and password:\r\n    if (data == null || !data.hasOwnProperty(thisUser)) { \r\n       this.emailInputRef.current.setCustomValidity(\"No account with this email address exists. Choose 'Create an account'.\");\r\n         return; //Exit the function; no need to check pw validity\r\n     } else {\r\n         this.emailInputRef.current.setCustomValidity(\"\");\r\n     }\r\n     if (data[thisUser].accountInfo.password != this.passwordInputRef.current.value) {\r\n        this.passwordInputRef.current.setCustomValidity(\"The password you entered is incorrect. Please try again or choose 'Reset your password'.\");\r\n     } else {\r\n        this.passwordInputRef.current.setCustomValidity(\"\");\r\n     }\r\n }",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleLogin -- Callback function that sets up initial app state upon login.\r\nhandleLogin = () => {\r\n    //Stop spinner\r\n    this.setState({loginBtnIcon: \"fa fa-sign-in\",\r\n                loginBtnLabel: \"Log In\"});\r\n    //Set current user\r\n    this.props.setUserId(this.emailInputRef.current.value);\r\n    //Trigger switch to FEED mode (default app landing page)\r\n    this.props.changeMode(AppMode.FEED);\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleLoginSubmit -- Called when user clicks on login button. Initiate spinner\r\n//for 1 second and call handleLogin to do the work.\r\nhandleLoginSubmit = (event) => {\r\n    event.preventDefault();\r\n    this.setState({loginBtnIcon: \"fa fa-spin fa-spinner\",\r\n                    loginBtnLabel: \"Logging In...\"});\r\n    //Initiate spinner for 1 second\r\n    setTimeout(this.handleLogin,1000);\r\n}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
