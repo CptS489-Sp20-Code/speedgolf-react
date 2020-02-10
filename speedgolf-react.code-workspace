@@ -9,7 +9,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "ref={this.passwordInputRef}",
+					"expression": "showSecurityQuestion: false,",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -18,7 +18,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "this.passwordInputRef = React.createRef();",
+					"expression": "this.accountEmail = React.createRef();",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -27,7 +27,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "onChange={this.handleLoginChange}",
+					"expression": "showLookUpAccountdDialog: false,\r\n                      showSecurityQuestionDialog: false,\r\n                      showPasswordResetDialog: false,",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -36,7 +36,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//handleLoginChange -- Check the validity of the username (email address)\r\n//password entered into the login page, setting the customValidity message \r\n//appropriately. \r\nhandleLoginChange = (event) => {\r\n    let thisUser = this.emailInputRef.current.value;\r\n    let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n    //Check username and password:\r\n    if (data == null || !data.hasOwnProperty(thisUser)) { \r\n       this.emailInputRef.current.setCustomValidity(\"No account with this email address exists. Choose 'Create an account'.\");\r\n         return; //Exit the function; no need to check pw validity\r\n     } else {\r\n         this.emailInputRef.current.setCustomValidity(\"\");\r\n     }\r\n     if (data[thisUser].accountInfo.password != this.passwordInputRef.current.value) {\r\n        this.passwordInputRef.current.setCustomValidity(\"The password you entered is incorrect. Please try again or choose 'Reset your password'.\");\r\n     } else {\r\n        this.passwordInputRef.current.setCustomValidity(\"\");\r\n     }\r\n }",
+					"expression": "resetEmail: \"\",",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -45,7 +45,7 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//handleLogin -- Callback function that sets up initial app state upon login.\r\nhandleLogin = () => {\r\n    //Stop spinner\r\n    this.setState({loginBtnIcon: \"fa fa-sign-in\",\r\n                loginBtnLabel: \"Log In\"});\r\n    //Set current user\r\n    this.props.setUserId(this.emailInputRef.current.value);\r\n    //Trigger switch to FEED mode (default app landing page)\r\n    this.props.changeMode(AppMode.FEED);\r\n}",
+					"expression": "resetQuestion: \"\",\r\n                      resetAnswer: \"\",",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
@@ -54,7 +54,88 @@
 			{
 				"pattern": {
 					"type": "string",
-					"expression": "//handleLoginSubmit -- Called when user clicks on login button. Initiate spinner\r\n//for 1 second and call handleLogin to do the work.\r\nhandleLoginSubmit = (event) => {\r\n    event.preventDefault();\r\n    this.setState({loginBtnIcon: \"fa fa-spin fa-spinner\",\r\n                    loginBtnLabel: \"Logging In...\"});\r\n    //Initiate spinner for 1 second\r\n    setTimeout(this.handleLogin,1000);\r\n}",
+					"expression": "showLookUpAccountDialog: false,\r\n                      showSecurityQuestionDialog: false,\r\n                      showPasswordResetDialog: false,",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "this.securityAnswer = React.createRef();\r\n        this.newPassword = React.createRef();",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": " this.repeatPassRef = React.createRef();\r\n        this.newUserRef = React.createRef();\r\n        this.accountEmailRef = React.createRef();\r\n        this.securityAnswerRef = React.createRef();\r\n        this.resetPasswordRef = React.createRef();\r\n        this.resetPasswordRepeatRef = React.createRef();",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleLookUpAccount: When the user clicks on the \"Look Up Account\" dialog box\r\n//button, we check whether the account exists. If it does, we update the state,\r\n//setting the resetEmail var to the email entered, hiding the current dialog box\r\n//and showing the security question dialog box.\r\nhandleLookUpAccount = (event) => {\r\n    event.preventDefault();\r\n    let thisUser = this.accountEmailRef.current.value;\r\n    let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n    //Check username and password:\r\n    if (data == null || !data.hasOwnProperty(thisUser)) { \r\n        alert(\"Sorry, there is no account associated with this email address.\");\r\n        this.accountEmailRef.current.focus();\r\n    } else {\r\n        this.setState({resetEmail: thisUser, \r\n                       resetQuestion: data[thisUser].accountInfo.securityQuestion,\r\n                       resetAnswer: data[thisUser].accountInfo.securityAnswer,\r\n                       showLookUpAccountDialog: false, \r\n                       showSecurityQuestionDialog: true});\r\n    }\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//renderLookUpAccountDialog -- Present a dialog box for user to enter the email address\r\n//associated with their account in case where they want to reset password\r\nrenderLookUpAccountDialog = () => {\r\n    return (\r\n    <div className=\"modal\" role=\"dialog\">\r\n      <div className=\"modal-dialog modal-lg\">\r\n        <div className=\"modal-content\">\r\n          <div className=\"modal-header\">\r\n            <h3 className=\"modal-title\"><b>Look Up Account</b>\r\n              <button className=\"close-modal-button\" \r\n                onClick={() => {this.setState({showLookUpAccountDialog: false})}}>\r\n                &times;</button>\r\n            </h3>\r\n          </div>\r\n          <div className=\"modal-body\">\r\n            <form onSubmit={this.handleLookUpAccount}>\r\n            <label>\r\n                Account Email Address: \r\n                <input\r\n                className=\"form-control form-text\"\r\n                type=\"email\"\r\n                size=\"35\"\r\n                placeholder=\"Enter Email Address\"\r\n                pattern=\"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\"\r\n                ref={this.accountEmailRef}\r\n                required={true}\r\n                />\r\n            </label>\r\n            <button type=\"submit\" className=\"btn btn-primary btn-color-theme form-submit-btn\">\r\n                <span className=\"fa fa-search\"></span>&nbsp;Look Up Account\r\n            </button>\r\n            </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  );  \r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleSecurityQuestionResponse: When the user clicks on the \"Check Answer\" dialog box\r\n//button, we check whether the security question answer is correct. If it is,\r\n//present dialog box for resetting the password. \r\nhandleSecurityQuestionResponse = (event) => {\r\n    event.preventDefault();\r\n    let response = this.securityAnswerRef.current.value;\r\n    if (response != this.state.resetAnswer) { \r\n        alert(\"Sorry, that is not the correct answer to the security question.\");\r\n        this.securityAnswerRef.current.select();\r\n    } else {\r\n        this.setState({showSecurityQuestionDialog: false, \r\n                       showPasswordResetDialog: true});\r\n    }\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//renderSecurityQuestionDialog -- Present a dialog box for user to enter answer\r\n//to their security question.\r\nrenderSecurityQuestionDialog = () => {\r\n    return (\r\n    <div className=\"modal\" role=\"dialog\">\r\n      <div className=\"modal-dialog modal-lg\">\r\n        <div className=\"modal-content\">\r\n          <div className=\"modal-header\">\r\n            <h3 className=\"modal-title\"><b>Answer Security Question</b>\r\n              <button className=\"close-modal-button\" \r\n                onClick={() => {this.setState({showSecurityQuestionDialog: false})}}>\r\n                &times;</button>\r\n            </h3>\r\n          </div>\r\n          <div className=\"modal-body\">\r\n            <form onSubmit={this.handleSecurityQuestionResponse}>\r\n            <label>\r\n                Security Question: \r\n                <textarea\r\n                readOnly={true}\r\n                value={this.state.resetQuestion}\r\n                className=\"form-control form-text\"\r\n                rows=\"3\"\r\n                cols=\"35\"\r\n                />\r\n            </label>\r\n            <label>\r\n                Security Answer: \r\n                <textarea\r\n                className=\"form-control form-text\"\r\n                placeholder=\"Enter Security Question Answer\"\r\n                ref={this.securityAnswerRef}\r\n                rows=\"3\"\r\n                cols=\"35\"\r\n                />\r\n            </label>\r\n            <button role=\"submit\" className=\"btn btn-primary btn-color-theme form-submit-btn\">\r\n                <span className=\"fa fa-check\"></span>&nbsp;Verify Answer\r\n            </button>\r\n            </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  );\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//handleResetPassword: When the user clicks on the \"Reset Password\" dialog box\r\n//button, we need check whether the passwords match. If they do,\r\n//we reset the password and log the user in. \r\nhandleResetPassword = (event) => {\r\n    event.preventDefault();\r\n   \r\n    if (this.resetPasswordRef.current.value != this.resetPasswordRepeatRef.current.value) { \r\n        alert(\"Sorry, The passwords you entered do not match. Please try again.\");\r\n        this.resetPasswordRepeatRef.current.select();\r\n    } else { //Reset password and log user in\r\n        let data = JSON.parse(localStorage.getItem(\"speedgolfUserData\"));\r\n        data[this.state.resetEmail].accountInfo.password = this.resetPasswordRef.current.value;\r\n        localStorage.setItem(\"speedgolfUserData\",JSON.stringify(data));\r\n        this.setState({showPasswordResetDialog: false});\r\n        this.props.setUserId(this.state.resetEmail);\r\n        this.props.changeMode(AppMode.FEED);\r\n    }\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "//renderPasswordResetDialog -- Present a dialog box for user to enter answer\r\n//to their security question.\r\nrenderPasswordResetDialog = () => {\r\n    return (\r\n    <div className=\"modal\" role=\"dialog\">\r\n      <div className=\"modal-dialog modal-lg\">\r\n        <div className=\"modal-content\">\r\n          <div className=\"modal-header\">\r\n            <h3 className=\"modal-title\"><b>Reset Password</b>\r\n              <button className=\"close-modal-button\" \r\n                onClick={() => {this.setState({showResetPasswordDialog: false})}}>\r\n                &times;</button>\r\n            </h3>\r\n          </div>\r\n          <div className=\"modal-body\">\r\n            <form onSubmit={this.handleResetPassword}>\r\n            <label>\r\n                New Password: \r\n                <input\r\n                type=\"password\"\r\n                placeholder=\"Enter new password\"\r\n                pattern=\"(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$\"\r\n                className=\"form-control form-text\"\r\n                ref={this.resetPasswordRef}\r\n                />\r\n            </label>\r\n            <label>\r\n                Repeat New Password: \r\n                <input\r\n                type=\"password\"\r\n                placeholder=\"Repeat new password\"\r\n                className=\"form-control form-text\"\r\n                ref={this.resetPasswordRepeatRef}\r\n                />\r\n            </label>\r\n            <button role=\"submit\" className=\"btn btn-primary btn-color-theme form-submit-btn\">\r\n                <span className=\"fa fa-key\"></span>&nbsp;Reset Password\r\n            </button>\r\n            </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  );\r\n}",
+					"ignoreCase": false,
+					"wholeMatch": false
+				},
+				"color": "yellow"
+			},
+			{
+				"pattern": {
+					"type": "string",
+					"expression": "{this.state.showLookUpAccountDialog ? this.renderLookUpAccountDialog() : null}\r\n        {this.state.showSecurityQuestionDialog ? this.renderSecurityQuestionDialog() : null}\r\n        {this.state.showPasswordResetDialog ? this.renderPasswordResetDialog() : null}",
 					"ignoreCase": false,
 					"wholeMatch": false
 				},
