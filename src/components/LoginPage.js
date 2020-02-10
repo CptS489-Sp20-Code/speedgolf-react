@@ -324,7 +324,10 @@ renderSecurityQuestionDialog = () => {
           <div className="modal-header">
             <h3 className="modal-title"><b>Answer Security Question</b>
               <button className="close-modal-button" 
-                onClick={() => {this.setState({showSecurityQuestionDialog: false})}}>
+                onClick={() => {this.setState({resetEmail: "", 
+                                 resetQuestion: "",
+                                 resetAnswer: "",
+                                 showSecurityQuestionDialog: false})}}>
                 &times;</button>
             </h3>
           </div>
@@ -374,9 +377,12 @@ handleResetPassword = (event) => {
         let data = JSON.parse(localStorage.getItem("speedgolfUserData"));
         data[this.state.resetEmail].accountInfo.password = this.resetPasswordRef.current.value;
         localStorage.setItem("speedgolfUserData",JSON.stringify(data));
-        this.setState({showPasswordResetDialog: false});
         this.props.setUserId(this.state.resetEmail);
         this.props.changeMode(AppMode.FEED);
+        this.setState({resetEmail: "", 
+                       resetQuestion: "",
+                       resetAnswer: "",
+                       showPasswordResetDialog: false});
     }
 }
 
@@ -390,7 +396,10 @@ renderPasswordResetDialog = () => {
           <div className="modal-header">
             <h3 className="modal-title"><b>Reset Password</b>
               <button className="close-modal-button" 
-                onClick={() => {this.setState({showResetPasswordDialog: false})}}>
+                onClick={() => {this.setState({resetEmail: "", 
+                                 resetQuestion: "",
+                                 resetAnswer: "",
+                                 showResetPasswordDialog: false})}}>
                 &times;</button>
             </h3>
           </div>
