@@ -1,5 +1,9 @@
 import React from 'react';
 import AppMode from "./../AppMode.js";
+import io from 'socket.io-client';
+import OAuth from './OAuth';
+import { API_URL } from './config';
+const providers = ['twitter', 'google', 'facebook', 'github'];
 
 class LoginPage extends React.Component {
 
@@ -479,14 +483,14 @@ render() {
              onClick={() => {this.setState({showLookUpAccountDialog: true});}}>Reset your password</button>
         </p>
      
-        <a role="button" className="login-btn">
+        <a role="button" className="login-btn" onClick={<OAuth provider="Google" socket=/>}>
             <img src="https://drive.google.com/uc?export=view&id=1YXRuG0pCtsfvbDSTzuM2PepJdbBpjEut" />
         </a>
         <a role="button" className="login-btn">
             <img src="https://drive.google.com/uc?export=view&id=1ZoySWomjxiCnC_R4n9CZWxd_qXzY1IeL" />
         </a>
         <p>
-            <i>Version CptS 489 Sp20 React</i>
+            <i>Version CptS 489 Sp20 React Amplify</i>
         </p>
         <p>
             <i>© 2020 Professor of Speedgolf. All rights reserved.</i>
